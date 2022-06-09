@@ -1,11 +1,6 @@
 import _ from 'lodash';
 import './style.css';
 
-const section = document.querySelector('section');
-const todoText = document.querySelector('input');
-const todoListSection = document.querySelector('todo-list');
-const clearBtn = document.querySelector('button');
-
 const todoListArr = [
   {
     description: 'Take the car to the mechanic',
