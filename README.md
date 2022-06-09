@@ -1,7 +1,9 @@
 
 
-# WEBPACK SETUP
+# TO DO LIST STRUCTURE
 
+## PROJECT DESCRIPTION
+This project is about building a simple to-do list project.
 
 
 ## Built With
@@ -15,7 +17,7 @@
 
 ## Getting Started
 
-To get started with this book run index.html in your browser then it will gives you all the functionalities 
+To get started with this project run index.html in your browser then it will gives you all the functionalities 
 
 
 ## Live Demo
