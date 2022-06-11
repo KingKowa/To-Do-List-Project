@@ -61,31 +61,29 @@ const editTodoList = (todoContainer,todoDescription) => {
   editInputText.classList = 'editInput';
   editInputText.value = todoDescription.textContent;
   todoContainer.replaceChild(editInputText, todoDescription);
-  editInputText.addEventListener('keypress', e => {
-    if(e.key === 'Enter'){
+  editInputText.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter'){
       const todoContainers = document.querySelectorAll('.todoContainer');
       const storageList = JSON.parse(localStorage.getItem('todolist'));
-      for(let i=0; i<todoContainers.length; i+=1){
-        if(todoContainers[i].classList.contains('clickedcheckbox')){
+      for (let i = 0; i < todoContainers.length; i += 1){
+        if (todoContainers[i].classList.contains('clickedcheckbox')){
           storageList[i].description = editInputText.value;
           localStorage.setItem('todolist', JSON.stringify(storageList));
         }
-
       }
       editInputText.parentElement.classList.remove('clickedcheckbox');
       todoContainer.replaceChild(todoDescription, editInputText);
       todoDescription.textContent = editInputText.value;
     }
   });
-
 };
 
 const removeTodoList = (todo) => {
   todoListSection.removeChild(todo);
   let count = 0;
   const localdata = JSON.parse(localStorage.getItem('todolist'));
-  const data = Array.from(localdata).filter(i => i.completed === false);
-  data.map(i => i.index = count ++);
+  const data = Array.from(localdata).filter((i) => i.completed === false);
+  data.map((i) => i.index = count++);
 };
 
 todoText.addEventListener('keypress', (event) => {
