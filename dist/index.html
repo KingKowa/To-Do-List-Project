@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-    <title>To Do List</title>
+    <title>ToDo List</title>
 <script defer src="/main.js"></script></head>
 <body>
-    <div id="to-do-list" class="to-do-list d-flex">
-        <div class="header d-flex">
-          <h2 class="title">
+    <section>
+        <div class="todo-header">
+          <h1>
               Today's To Do
-          </h2>
+          </h1>
           <i class="fa-solid fa-rotate"></i>
         </div>
-        <form class="newTask d-flex">
-          <input type="text" placeholder="Enter New Task">
-          <button type="submit"><i class="fa-solid fa-arrow-turn-down-left"></i></button>
+        <form>
+            <input type="text" placeholder="Enter your to-do list....">
+            <div class="todo-list" id="todo-list">
+            </div>
         </form>
-        <div id="taskList"></div>
         <button type="button" class="clearCompleted">Clear all Completed</button>
-      </div>
+    </section>
 </body>
 </html>

@@ -2,6 +2,7 @@
   "name": "set-up-project-with-webpack",
   "version": "1.0.0",
   "description": "In this exercise I will build a simple yet powerful webpack boilerplate, which later I will be able to use as a starting point in my projects. I'll be working with the webpack official guides.",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
