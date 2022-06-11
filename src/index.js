@@ -4,10 +4,10 @@ const todoListSection = document.getElementById('todo-list');
 const todoText = document.querySelector('input');
 
 class TodoObject {
-  constructor(description, completed, index){
-    this.description = description
-    this.completed = completed
-    this.index = index
+  constructor(description, completed, index) {
+    this.description = description;
+    this.completed = completed;
+    this.index = index;
   }
 }
 
@@ -24,14 +24,14 @@ const addTodo = (todoDescription) => {
   </div>`;
   todoListSection.appendChild(todoContainer);
 
-  const checkBox = document.querySelectorAll('.checkbox'); 
-  checkBox.forEach(i => {
+  const checkBox = document.querySelectorAll('.checkbox');
+  checkBox.forEach((i) => {
     i.addEventListener('click', () => {
       i.parentElement.classList.toggle('clickedcheckbox');
       i.nextElementSibling.classList.toggle('checkTodo');
       i.parentElement.lastElementChild.classList.toggle('trashbin-active');
       i.parentElement.lastElementChild.previousElementSibling.classList.toggle('rmv-edit');
-    })
+    });
   })
 
   const listObject = new TodoObject(todoDescription, false, checkBox.length);
@@ -39,12 +39,12 @@ const addTodo = (todoDescription) => {
   localStorage.setItem('todolist', JSON.stringify(todoListArr));
 
   const editIcon = document.querySelectorAll('.fa-ellipsis-v');
-  editIcon.forEach(i => {
+  editIcon.forEach((i) => {
     i.addEventListener('click', () => {
-      i.parentElement.classList.toggle('clickedcheckbox'); 
+      i.parentElement.classList.toggle('clickedcheckbox');
       editTodoList(todoContainer, i.previousElementSibling);
-    })
-  })
+    });
+  });
 
   const removeIcon = document.querySelectorAll('.fa-trash-alt');
   removeIcon.forEach(i => {
@@ -87,13 +87,12 @@ const removeTodoList = (todo) => {
   const localdata = JSON.parse(localStorage.getItem('todolist'));
   const data = Array.from(localdata).filter(i => i.completed === false);
   data.map(i => i.index = count += 1);
-}
+};
 
-todoText.addEventListener('keypress', event=>{
-  if(event.key === 'Enter' && todoText.value){
+todoText.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter' && todoText.value) {
     event.preventDefault();
     addTodo(todoText.value);
     todoText.value = null;
   }
 });
-

@@ -22,7 +22,7 @@ To get started with this project run index.html in your browser then it will giv
 
 
 ## Live Demo
-[see awesome books live]()
+[see todo lis live]()
 
 ## Authors
 
