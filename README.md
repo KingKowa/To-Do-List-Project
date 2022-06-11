@@ -3,7 +3,8 @@
 # TO DO LIST STRUCTURE
 
 ## PROJECT DESCRIPTION
-This project is about building a simple to-do list project.
+1. This project is about building a simple to-do list project.
+2. Implement add and remove function for the to-do list project
 
 
 ## Built With
