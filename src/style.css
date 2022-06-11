@@ -33,3 +33,23 @@ section {
   display: flex;
   flex-direction: column;
 }
+
+.fa-trash-alt {
+  display: none;
+}
+
+.trashbin-active {
+  display: block;
+}
+
+.rmv-edit {
+  display: none;
+}
+
+.clickedcheckbox {
+  background-color: orangered;
+}
+
+.checkTodo {
+  text-decoration: line-through;
+}
