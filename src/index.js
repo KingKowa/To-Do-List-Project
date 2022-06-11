@@ -16,7 +16,7 @@ const removeTodoList = (todo) => {
   let count = 0;
   const localdata = JSON.parse(localStorage.getItem('todolist'));
   const data = Array.from(localdata).filter((i) => i.completed === false);
-  data.map((i) => i.index = count++);
+  data.map((i) => (i.index = count+= 1));
   localStorage.setItem('todolist', JSON.stringify(data));
 };
 
@@ -86,8 +86,6 @@ const addTodo = (todoDescription) => {
     });
   });
 };
-
-
 
 todoText.addEventListener('keypress', (event) => {
   if (event.key === 'Enter' && todoText.value) {
