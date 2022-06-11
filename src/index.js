@@ -13,10 +13,9 @@ class TodoObject {
 
 const removeTodoList = (todo) => {
   todoListSection.removeChild(todo);
-  let count = 0;
   const localdata = JSON.parse(localStorage.getItem('todolist'));
   const data = Array.from(localdata).filter((i) => i.completed === false);
-  data.map((i) => (i.index = count+= 1));
+  data.map((i) => i.index );
   localStorage.setItem('todolist', JSON.stringify(data));
 };
 
