@@ -32,7 +32,7 @@ const addTodo = (todoDescription) => {
       i.parentElement.lastElementChild.classList.toggle('trashbin-active');
       i.parentElement.lastElementChild.previousElementSibling.classList.toggle('rmv-edit');
     });
-  })
+  });
 
   const listObject = new TodoObject(todoDescription, false, checkBox.length);
   todoListArr.push(listObject);
@@ -47,13 +47,12 @@ const addTodo = (todoDescription) => {
   });
 
   const removeIcon = document.querySelectorAll('.fa-trash-alt');
-  removeIcon.forEach(i => {
+  removeIcon.forEach((i) => {
     i.addEventListener('click', () => {
       i.parentElement.classList.toggle('clickedcheckbox');
       removeTodoList(i.parentElement);
-    })
+    });
   })
-
 };
 
 const editTodoList = (todoContainer,todoDescription) => {
@@ -77,16 +76,16 @@ const editTodoList = (todoContainer,todoDescription) => {
       todoContainer.replaceChild(todoDescription, editInputText);
       todoDescription.textContent = editInputText.value;
     }
-  })
+  });
 
-}
+};
 
 const removeTodoList = (todo) => {
   todoListSection.removeChild(todo);
   let count = 0;
   const localdata = JSON.parse(localStorage.getItem('todolist'));
   const data = Array.from(localdata).filter(i => i.completed === false);
-  data.map(i => i.index = count += 1);
+  data.map(i => i.index = count ++);
 };
 
 todoText.addEventListener('keypress', (event) => {
