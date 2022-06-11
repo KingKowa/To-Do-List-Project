@@ -1,95 +1,83 @@
-import './style.css';
+import Todo from './modules/managedata.js';
+import './index.css';
 
-const todoListSection = document.getElementById('todo-list');
-const todoText = document.querySelector('input');
+const todo = new Todo();
 
-class TodoObject {
-  constructor(description, completed, index) {
-    this.description = description;
-    this.completed = completed;
-    this.index = index;
+const populateData = () => {
+  if (localStorage.getItem('todo')) {
+    todo.setTodos(JSON.parse(localStorage.getItem('todo')));
   }
-}
-
-const removeTodoList = (todo) => {
-  todoListSection.removeChild(todo);
-  const localdata = JSON.parse(localStorage.getItem('todolist'));
-  const data = Array.from(localdata).filter((i) => i.completed === false);
-  data.map((i) => i.index);
-  localStorage.setItem('todolist', JSON.stringify(data));
-};
-
-const editTodoList = (todoContainer, todoDescription) => {
-  const editInputText = document.createElement('input');
-  editInputText.type = 'text';
-  editInputText.classList = 'editInput';
-  editInputText.value = todoDescription.textContent;
-  todoContainer.replaceChild(editInputText, todoDescription);
-  editInputText.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      const todoContainers = document.querySelectorAll('.todoContainer');
-      const storageList = JSON.parse(localStorage.getItem('todolist'));
-      for (let i = 0; i < todoContainers.length; i += 1) {
-        if (todoContainers[i].classList.contains('clickedcheckbox')) {
-          storageList[i].description = editInputText.value;
-          localStorage.setItem('todolist', JSON.stringify(storageList));
-        }
-      }
-      editInputText.parentElement.classList.remove('clickedcheckbox');
-      todoContainer.replaceChild(todoDescription, editInputText);
-      todoDescription.textContent = editInputText.value;
+  const data = todo.getTodos();
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  data.forEach((singledata) => {
+    const li = document.createElement('li');
+    const licheckbox = document.createElement('input');
+    const inputelem = document.createElement('input');
+    const span = document.createElement('span');
+    const garbage = document.createElement('span');
+    garbage.innerHTML = '&#128465;&#65039;';
+    span.setAttribute('class', `${singledata.index} bullet${singledata.index} rmv dots`);
+    garbage.setAttribute('class', `${singledata.index} bullet${singledata.index} rmv garbage`);
+    span.innerHTML = '&#8285;';
+    garbage.classList.add('show');
+    licheckbox.setAttribute('type', 'checkbox');
+    licheckbox.setAttribute('class', `${singledata.index} checkbox`);
+    licheckbox.setAttribute('id', `${singledata.index}`);
+    inputelem.setAttribute('class', `${singledata.index} bullet${singledata.index} inputfields inputbox`);
+    inputelem.setAttribute('type', 'text');
+    inputelem.setAttribute('value', singledata.description);
+    if (singledata.completed === true) {
+      inputelem.classList.toggle('completed');
     }
+    li.appendChild(licheckbox);
+    li.appendChild(inputelem);
+    li.appendChild(garbage);
+    li.appendChild(span);
+    list.appendChild(li);
   });
 };
 
-const todoListArr = [];
+populateData();
 
-const addTodo = (todoDescription) => {
-  const todoContainer = document.createElement('div');
-  todoContainer.className = 'todoContainer';
-  todoContainer.innerHTML += `
-  <input type="checkbox" class="checkbox">
-  <span>${todoDescription}</span>
-  <i class="fas fa-ellipsis-v"></i>
-  <i class="fas fa-trash-alt"></i>
-  </div>`;
-  todoListSection.appendChild(todoContainer);
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('checkbox')) {
+    todo.complete(Number(event.target.classList[0]));
+    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
+    populateData();
+  }
 
-  const checkBox = document.querySelectorAll('.checkbox');
-  checkBox.forEach((i) => {
-    i.addEventListener('click', () => {
-      i.parentElement.classList.toggle('clickedcheckbox');
-      i.nextElementSibling.classList.toggle('checkTodo');
-      i.parentElement.lastElementChild.classList.toggle('trashbin-active');
-      i.parentElement.lastElementChild.previousElementSibling.classList.toggle('rmv-edit');
-    });
-  });
+  if (event.target.classList.contains('dots') || event.target.classList.contains('inputfields')) {
+    document.querySelector(`.${event.target.classList[1]}.garbage`).classList.remove('show');
+    document.querySelector(`.${event.target.classList[1]}.dots`).classList.add('show');
+  }
 
-  const listObject = new TodoObject(todoDescription, false, checkBox.length);
-  todoListArr.push(listObject);
-  localStorage.setItem('todolist', JSON.stringify(todoListArr));
+  if (event.target.classList.contains('garbage')) {
+    todo.removeTodo(Number(event.target.classList[0]));
+    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
+    populateData();
+  }
 
-  const editIcon = document.querySelectorAll('.fa-ellipsis-v');
-  editIcon.forEach((i) => {
-    i.addEventListener('click', () => {
-      i.parentElement.classList.toggle('clickedcheckbox');
-      editTodoList(todoContainer, i.previousElementSibling);
-    });
-  });
+  if (event.target.classList.contains('clear-button')) {
+    todo.clearCompleted();
+    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
+    populateData();
+  }
+});
 
-  const removeIcon = document.querySelectorAll('.fa-trash-alt');
-  removeIcon.forEach((i) => {
-    i.addEventListener('click', () => {
-      i.parentElement.classList.toggle('clickedcheckbox');
-      removeTodoList(i.parentElement);
-    });
-  });
-};
+document.addEventListener('keypress', (event) => {
+  if (event.which === 13) {
+    if (event.target.classList.contains('newtodo')) {
+      todo.addTodo(event.target.value);
+      event.target.value = '';
+      localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
+      populateData();
+    }
 
-todoText.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter' && todoText.value) {
-    event.preventDefault();
-    addTodo(todoText.value);
-    todoText.value = null;
+    if (event.target.classList.contains('inputfields')) {
+      todo.editTodo(Number(event.target.classList[0]), event.target.value);
+      localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
+      populateData();
+    }
   }
 });
