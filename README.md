@@ -4,7 +4,8 @@
 
 ## PROJECT DESCRIPTION
 1. This project is about building a simple to-do list project.
-2. Implement add and remove function for the to-do list project
+2. Implement add and remove function for the to-do list project.
+3. Added modules folder to manage the to-do data.
 
 
 ## Built With
