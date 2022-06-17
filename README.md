@@ -5,6 +5,9 @@
 ## PROJECT DESCRIPTION
 This project is about building a simple to-do list project.
 
+- Implemented a function for the "Clear all completed" button.
+- Stored updated array items i local storage 
+
 
 ## Built With
 
