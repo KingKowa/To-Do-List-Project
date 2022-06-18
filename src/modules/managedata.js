@@ -47,7 +47,6 @@ class Todo {
       return singleTodo;
     });
   }
-  
 
   getTodos() {
     return this.todos;
