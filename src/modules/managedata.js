@@ -35,7 +35,18 @@ class Todo {
     });
   }
 
-  //clear button funtion
+  clearCompleted() {
+    this.setTodos(this.todos.filter((singleTodo) => singleTodo.completed === false));
+  }
+
+  complete(index) {
+    this.todos = this.todos.map((singleTodo) => {
+      if (singleTodo.index === index) {
+        singleTodo.completed = !singleTodo.completed;
+      }
+      return singleTodo;
+    });
+  }
   
 
   getTodos() {
