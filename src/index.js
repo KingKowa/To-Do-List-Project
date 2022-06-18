@@ -65,8 +65,6 @@ document.addEventListener('click', (event) => {
   }
 });
 
-
-
 document.addEventListener('keypress', (event) => {
   if (event.which === 13) {
     if (event.target.classList.contains('newtodo')) {
