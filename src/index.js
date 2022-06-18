@@ -40,30 +40,9 @@ const populateData = () => {
 
 populateData();
 
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('checkbox')) {
-    todo.complete(Number(event.target.classList[0]));
-    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
-    populateData();
-  }
+//checkbox eventlistener
 
-  if (event.target.classList.contains('dots') || event.target.classList.contains('inputfields')) {
-    document.querySelector(`.${event.target.classList[1]}.garbage`).classList.remove('show');
-    document.querySelector(`.${event.target.classList[1]}.dots`).classList.add('show');
-  }
 
-  if (event.target.classList.contains('garbage')) {
-    todo.removeTodo(Number(event.target.classList[0]));
-    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
-    populateData();
-  }
-
-  if (event.target.classList.contains('clear-button')) {
-    todo.clearCompleted();
-    localStorage.setItem('todo', JSON.stringify(todo.getTodos()));
-    populateData();
-  }
-});
 
 document.addEventListener('keypress', (event) => {
   if (event.which === 13) {
