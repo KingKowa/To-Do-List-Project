@@ -1,9 +1,14 @@
 
 
-# TO DO LIST STRUCTURE
+# TO DO LIST PROJECT
 
 ## PROJECT DESCRIPTION
-This project is about building a simple to-do list project.
+
+This project is about building a simple to-do list project. It contains list of activities 
+needed to be carried out.
+
+- Implemented a function for the "Clear all completed" button.
+- Stored updated array items in local storage 
 
 
 ## Built With
@@ -17,7 +22,21 @@ This project is about building a simple to-do list project.
 
 ## Getting Started
 
-To get started with this project run index.html in your browser then it will gives you all the functionalities 
+To get started with this project run index.html in your browser then it will gives you all the functionalities
+
+## INSTALLATIONS
+
+### How to clone the repository
+
+Follow these steps to properly clone the repository to your desktop
+
+$ cd desktop
+$ git clone https://github.com/KingKowa/To-Do-List-Project.git
+$ cd To-Do-List-Project
+$ open index.html file
+
+### Install Webpack
+- [Webpack](https://webpack.js.org/guides/getting-started)
 
 
 ## Live Demo
